@@ -14,12 +14,15 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "sudokuSolver",
-            dependencies: ["Puzzle", "IndexableString"]),
+            dependencies: ["Puzzle", "intIndexableString", "Cell"]),
         .target(
             name: "Puzzle",
-            dependencies: []),
+            dependencies: ["intIndexableString"]),
         .target(
-            name: "IndexableString",
+            name: "Cell",
+            dependencies: ["intIndexableString"]),
+        .target(
+            name: "intIndexableString",
             dependencies: []),
         .testTarget(
             name: "sudokuSolverTests",
