@@ -1,3 +1,6 @@
 import intIndexableString
+import Cell
 
-struct Puzzle {}
+struct Puzzle {
+    var a1: Cell
+}
