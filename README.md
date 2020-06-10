@@ -1,2 +1,3 @@
 # sudokuSolver
-Solves Sudoku puzzles so I don't have to.
+
+A description of this package.
