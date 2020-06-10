@@ -14,6 +14,12 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "sudokuSolver",
+            dependencies: ["Puzzle", "IndexableString"]),
+        .target(
+            name: "Puzzle",
+            dependencies: []),
+        .target(
+            name: "IndexableString",
             dependencies: []),
         .testTarget(
             name: "sudokuSolverTests",
