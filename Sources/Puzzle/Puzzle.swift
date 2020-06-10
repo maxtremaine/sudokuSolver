@@ -1,0 +1,3 @@
+import intIndexableString
+
+struct Puzzle {}
