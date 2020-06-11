@@ -16,8 +16,8 @@ if !(try startCondition.checkPuzzle()) {
 }
 
 let runSequence = startCondition.grid.values
-    .filter { $0.value != "_"}
-    .sorted { $0.value < $1.value }
+    .filter { $0.value == "_"}
+    .sorted { $0.freedom < $1.freedom }
 
 for cell in runSequence {
     var newWorkingConditions: [Puzzle] = []
