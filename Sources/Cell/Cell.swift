@@ -1,17 +1,17 @@
 public struct Cell {
-    var code: CellCode
+    public var code: CellCode
     public var value: Character
-    var col: Column {
+    public var col: Column {
         get {
             return Column.a
         }
     }
-    var row: Int {
+    public var row: Int {
         get {
             return 1
         }
     }
-    var box: Box {
+    public var box: Box {
         get {
             return Box.b2
         }
@@ -26,23 +26,13 @@ public struct Cell {
         self.code = code
         self.value = value
     }
-
-    public static func fromSomething() -> Cell {
-        return Cell(code: CellCode.a1, value: "1")
-    }
-
-    public static func doStuff() {
-        for col in Box.allCases {
-            print(col)
-        }
-    }
 }
 
-enum Column: CaseIterable {
+public enum Column: CaseIterable {
     case a, b, c, d, e, f, g, h, i
 }
 
-enum Box: CaseIterable {
+public enum Box: CaseIterable {
     case b2, e2, h2, b5, e5, h5, b8, e8, h8
 }
 

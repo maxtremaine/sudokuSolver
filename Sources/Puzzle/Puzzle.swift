@@ -76,7 +76,7 @@ public struct Puzzle {
 
     public static func fromFile(content: String) throws -> Puzzle {
         if (content.count != 167) {
-            throw PuzzleError(message: "The .sudoku file is not formatted properly.")
+            throw PuzzleError("The .sudoku file is not formatted properly.")
         }
 
         return Puzzle(a1: content[16], b1: content[17], c1: content[18],
@@ -95,7 +95,7 @@ public struct Puzzle {
             d9: content[160], e9: content[161], f9: content[162], g9: content[164], h9: content[165], i9: content[166])
     }
 
-    public func toList(groupType: GroupType, code: CellCode) -> [Cell] {
+    func toArray() -> [Cell] {
         var output: [Cell] = []
 
         for child in Mirror(reflecting: self).children {
@@ -106,12 +106,99 @@ public struct Puzzle {
 
         return output
     }
+
+    func getGroup(_ groupType: GroupType, rowCode: Int? = nil, colCode: Column? = nil,
+        boxCode: Box? = nil) -> [Cell] {
+        var output: [Cell] = []
+        
+        for cell in self.toArray() {
+            switch groupType {
+                case GroupType.Row:
+                    if cell.row == rowCode {
+                        output.append(cell)
+                    }
+                case GroupType.Column:
+                    if cell.col == colCode {
+                        output.append(cell)
+                    }
+                case GroupType.Box:
+                    if cell.box == boxCode {
+                        output.append(cell)
+                    }
+            }
+        }
+
+        return output
+    }
+
+    func checkGroup(_ group: [Cell]) throws -> Bool {
+        if group.count != 9 {
+            throw PuzzleError("The group size renders it invalid.")
+        }
+
+        var checkScope: Set<Character> = []
+
+        for cell in group {
+            if cell.value != "_" {
+                if checkScope.contains(cell.value) {
+                    return false
+                } else {
+                    checkScope.insert(cell.value)
+                }
+            }
+        }
+
+        return true
+    }
+
+    func checkRelativeCells(_ cell: Cell) throws -> Bool {
+
+        if try checkGroup(self.getGroup(GroupType.Row, rowCode: cell.row)) == false {
+            return false
+        }
+
+        if try checkGroup(self.getGroup(GroupType.Column, colCode: cell.col)) == false {
+            return false
+        }
+
+        if try checkGroup(self.getGroup(GroupType.Box, boxCode: cell.box)) == false {
+            return false
+        }
+
+        return true
+    }
+
+    func checkPuzzle() throws -> Bool {
+        for row in 1...9 {
+            if try checkGroup(self.getGroup(GroupType.Row, rowCode: row)) == false {
+                return false
+            }
+        }
+
+        for col in Column.allCases {
+            if try checkGroup(self.getGroup(GroupType.Column, colCode: col)) == false {
+                return false
+            }
+        }
+
+        for box in Box.allCases {
+            if try checkGroup(self.getGroup(GroupType.Box, boxCode: box)) == false {
+                return false
+            }
+        }
+
+        return true
+    }
 }
 
 struct PuzzleError: Error {
     let message: String
+
+    init(_ message: String) {
+        self.message = message
+    }
 }
 
-public enum GroupType {
+enum GroupType {
     case Row, Column, Box
 }
