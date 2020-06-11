@@ -104,7 +104,7 @@ public struct Puzzle {
         return output
     }
 
-    func checkRelativeCells(_ cell: Cell) throws -> Bool {
+    public func checkRelativeCells(_ cell: Cell) throws -> Bool {
 
         if try checkGroup(self.getGroup(GroupType.Row, rowCode: cell.row)) == false {
             return false
