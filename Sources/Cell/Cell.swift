@@ -102,7 +102,7 @@ public struct Cell {
         }
     }
 
-    public init(code: CellCode, value: Character) {
+    public init(_ code: CellCode, value: Character) {
         self.code = code
         self.value = value
         self.freedom = 0
