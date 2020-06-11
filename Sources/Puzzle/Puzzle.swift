@@ -168,7 +168,7 @@ public struct Puzzle {
         return true
     }
 
-    func checkPuzzle() throws -> Bool {
+    public func checkPuzzle() throws -> Bool {
         for row in 1...9 {
             if try checkGroup(self.getGroup(GroupType.Row, rowCode: row)) == false {
                 return false
@@ -191,10 +191,10 @@ public struct Puzzle {
     }
 }
 
-struct PuzzleError: Error {
+public struct PuzzleError: Error {
     let message: String
 
-    init(_ message: String) {
+    public init(_ message: String) {
         self.message = message
     }
 }
