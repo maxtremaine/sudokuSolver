@@ -110,10 +110,6 @@ public struct Puzzle {
         return output
     }
 
-    func v(_ cell: CellCode) -> Character {
-        return self.grid[cell]!.value
-    }
-
     func calcCellFreedom(_ cell: Cell) -> Int {
         var freedom = 0
 
