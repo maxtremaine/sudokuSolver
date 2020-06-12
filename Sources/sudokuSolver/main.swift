@@ -35,6 +35,9 @@ for cell in runSequence {
     print(workingConditions.count)
 }
 
+let outPath = URL(fileURLWithPath: "IO/finish.sudoku")
+try workingConditions[0].toFile().write(to: outPath, atomically: false, encoding: String.Encoding.utf8)
+
 let t1 = DispatchTime.now()
 let elapsedSeconds = Double((t1.uptimeNanoseconds - t0.uptimeNanoseconds) / 1000000000)
 print(elapsedSeconds)
