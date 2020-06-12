@@ -105,7 +105,7 @@ public struct Puzzle {
         output += "  -----------\n"
         output += "7 \(a7)\(b7)\(c7)|\(d7)\(e7)\(f7)|\(g7)\(h7)\(i7)\n"
         output += "8 \(a8)\(b8)\(c8)|\(d8)\(e8)\(f8)|\(g8)\(h8)\(i8)\n"
-        output += "9 \(a9)\(b9)\(c9)|\(d9)\(e9)\(f9)|\(g9)\(h9)\(i9)\n"
+        output += "9 \(a9)\(b9)\(c9)|\(d9)\(e9)\(f9)|\(g9)\(h9)\(i9)"
 
         return output
     }
