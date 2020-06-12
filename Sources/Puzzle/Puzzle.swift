@@ -7,12 +7,12 @@ public struct Puzzle {
     init(_ grid: [CellCode: Cell]) throws {
         self.grid = grid
 
-        for (key, cell) in (self.grid.filter {$1.value == "_"}) {
-            self.grid[key]!.freedom = calcCellFreedom(cell)
-        }
-
         if grid.count != 81 {
             throw PuzzleError("This puzzle is the wrong size.")
+        }
+
+        for (key, cell) in (self.grid.filter {$1.value == "_"}) {
+            self.grid[key]!.freedom = calcCellFreedom(cell)
         }
     }
 
